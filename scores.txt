@@ -1,0 +1,8 @@
+zeinneb;mastermind;6;68.00;420
+zeineb;comptebon;1;12.00;330
+zeineb;comptebon;3;39.00;292
+zouba;comptebon;2;10,00;360
+zouba;comptebon;1;11,00;330
+zouba;mastermind;13;291,00;136
+zouba;comptebon;2;11,00;360
+zouba;comptebon;1;5,00;330
