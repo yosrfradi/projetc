@@ -75,13 +75,17 @@ void jouer_defi_tri_ultime(char nom_joueur[]) {
     stats.temps = difftime(fin, debut);
 
     if (!is_sorted(arr, SIZE)) {
-        printf("ECHEC : tableau non trie ! Score = 0\n");
+        printf("ECHEC : tableau non trie ! Score = 0/100\n");
         stats.score_final = 0;
         return;
     }
 
     double multi = (stats.temps < 20) ? 2.0 : (stats.temps < 40) ? 1.5 : (stats.temps < 60) ? 1.2 : 1.0;
-    stats.score_final = (int)(stats.score_brut * multi);
+    
+    double score_temp = stats.score_brut * multi;
+    if (score_temp > 100.0) score_temp = 100.0;
+    stats.score_final = (int)score_temp;
+    
 
     // Sauvegarder le score
     int steps = stats.comparisons + stats.swaps;
@@ -89,7 +93,8 @@ void jouer_defi_tri_ultime(char nom_joueur[]) {
 
     printf("\nREUSSI ! Tableau trie !\n");
     printf("Comparaisons : %d | Echanges : %d | Temps : %.0fs\n", stats.comparisons, stats.swaps, stats.temps);
-    printf("Score brut : %d x %.1f = SCORE FINAL : %d\n", stats.score_brut, multi, stats.score_final);
+    printf("Score brut : %d x %.1f = Score calcule : %.0f\n", stats.score_brut, multi, stats.score_brut * multi);
+    printf("SCORE FINAL : %d/100\n", stats.score_final);  // Changé ici aussi
     
     printf("\nAppuyez sur Entree pour revenir au menu...");
     int c;

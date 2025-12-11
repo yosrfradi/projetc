@@ -224,8 +224,42 @@ void jouer_defi_compte_bon(char nom_joueur[]) {
     }
 
     double temps = difftime(time(NULL), debut);
+    
+    // ========== CORRECTION DU SCORE POUR ÊTRE SUR 100 ==========
+    
+    // 1. Normaliser le score brut (actuel : 75 à 225 points)
+    // Ancien calcul : 15 points/étape + 150 points bonus
+    // Nouveau calcul : convertir sur échelle 0-100
+    
+    double score_normalise;
+    
+    if (score == 0) {
+        // Échec total (aucune opération valide)
+        score_normalise = 0;
+    } else {
+        // Convertir l'échelle 75-225 vers 0-100
+        // score_min = 75 (5 étapes sans atteindre la cible : 5*15 = 75)
+        // score_max = 225 (atteindre la cible rapidement : 150 + 75 = 225)
+        
+        // Échelle linéaire : 75→0, 225→100
+        score_normalise = ((score - 75) * 100.0) / 150.0;
+        
+        // Limiter entre 0 et 100
+        if (score_normalise < 0) score_normalise = 0;
+        if (score_normalise > 100) score_normalise = 100;
+    }
+    
+    // 2. Multiplicateur temporel (garder le même)
     double multi = (temps < 30) ? 2.0 : (temps < 60) ? 1.5 : (temps < 90) ? 1.2 : 1.0;
-    int score_final = (int)(score * multi);
+    
+    // 3. Calcul du score final sur 100
+    int score_final = (int)(score_normalise * multi);
+    
+    // Limiter à 100
+    if (score_final > 100) score_final = 100;
+    if (score_final < 0) score_final = 0;
+    
+    // ============================================================
 
     printf("\n");
     printf("============================================\n");
@@ -236,7 +270,9 @@ void jouer_defi_compte_bon(char nom_joueur[]) {
     }
 
     printf("\nTemps : %.1f s | Multiplicateur : x%.1f\n", temps, multi);
-    printf("Score brut : %d -> SCORE FINAL : %d\n", score, score_final);
+    printf("Score brut : %d\n", score);
+    printf("Score normalise : %.0f/100\n", score_normalise);
+    printf("SCORE FINAL : %d/100\n", score_final);
     printf("============================================\n");
 
     // Sauvegarder le score

@@ -6,3 +6,12 @@ zouba;comptebon;1;11,00;330
 zouba;mastermind;13;291,00;136
 zouba;comptebon;2;11,00;360
 zouba;comptebon;1;5,00;330
+yosr;comptebon;5;150,00;75
+belha;mastermind;12;193,00;160
+Joueur;mastermind;9;119,00;122
+yosr;mastermind;6;370,00;96
+noura;triultime;4;71,00;20
+youssef;triultime;3;58,00;17
+ahmed;triultime;1;94,00;5
+rafia;triultime;3;48,00;17
+rafia;triultime;3;44,00;17
